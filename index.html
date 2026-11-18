@@ -137,6 +137,7 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 .credit{position:absolute;left:50%;transform:translateX(-50%);bottom:6px;font-size:clamp(10px,1vw,13px);color:#8fb09c;letter-spacing:.3px;white-space:nowrap;pointer-events:none;font-family:'Segoe UI',Tahoma,sans-serif}
 .credit strong{color:var(--wheat);font-weight:700}
 @media(max-width:760px){.credit{bottom:2px}.bar{height:74px;padding-bottom:14px}}
+.nav button.txt{letter-spacing:.6px;font-family:'Segoe UI',Tahoma,sans-serif;width:auto;padding:0 16px;font-size:clamp(13px,1.3vw,16px);font-weight:700;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -215,6 +216,7 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
   <div class="credit" dir="ltr">Designed &amp; developed by <strong>Mustafa Muhammad Abdul Jalil</strong></div>
   <div class="nav">
     <button id="next" aria-label="التالي">›</button><span id="count"></span><button id="prev" aria-label="السابق">‹</button>
+    <button id="home" class="txt" type="button" onclick="go(0)" dir="ltr">Home</button>
     <button id="fs" aria-label="ملء الشاشة">⛶</button>
   </div>
 </div>
