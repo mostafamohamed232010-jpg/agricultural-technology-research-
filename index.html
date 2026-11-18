@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دور تطبيقات الذكاء الاصطناعي في تطوير الزراعة الحديثة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --soil:#10261f; --leaf:#2f8f5b; --wheat:#f0c75e; --mist:#eaf3ec; --sky:#7fd1c7; --ink:#0c1f19;
+  --card:rgba(255,255,255,.07); --line:rgba(234,243,236,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--soil);color:var(--mist);font-family:'Cairo','Segoe UI',Tahoma,sans-serif;overflow:hidden}
+.deck{position:relative;height:100%;width:100%}
+.slide{position:absolute;inset:0;padding:clamp(20px,4vw,56px) clamp(20px,5vw,72px) 84px;display:flex;flex-direction:column;gap:clamp(12px,2vh,24px);
+  opacity:0;visibility:hidden;transform:translateX(-40px);transition:opacity .45s,transform .45s,visibility .45s;overflow-y:auto}
+.slide.active{opacity:1;visibility:visible;transform:none}
+.slide.prev{transform:translateX(40px)}
+.slide::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 10% 0%,rgba(47,143,91,.35),transparent 60%),radial-gradient(700px 400px at 100% 100%,rgba(127,209,199,.12),transparent 60%)}
+.slide>*{position:relative;z-index:1}
+
+/* Cover */
+.cover{justify-content:center}
+.rows{position:absolute!important;inset:auto 0 0 0;height:46%;z-index:0!important;overflow:hidden;
+  mask-image:linear-gradient(to top,#000 20%,transparent)}
+.rows::before{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(100deg,transparent 0 38px,rgba(47,143,91,.55) 38px 44px);
+  transform:perspective(500px) rotateX(58deg) scale(1.8);transform-origin:bottom;animation:grow 14s linear infinite}
+@keyframes grow{to{background-position:-88px 0}}
+.drone{position:absolute!important;top:12%;left:9%;width:clamp(70px,10vw,130px);animation:hover 4s ease-in-out infinite;z-index:1}
+@keyframes hover{50%{transform:translate(18px,-14px) rotate(-4deg)}}
+.cover h1{font-size:clamp(30px,5.6vw,72px);font-weight:900;line-height:1.25;max-width:16ch}
+.cover .sub{color:var(--wheat);font-size:clamp(16px,2.2vw,28px);font-weight:600;margin-top:4px}
+.abstract{max-width:62ch;font-size:clamp(14px,1.5vw,19px);line-height:1.9;color:#cfe3d6;margin-top:10px;border-right:4px solid var(--wheat);padding-right:16px}
+.team{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.team button{background:var(--card);color:var(--mist);border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-family:inherit;font-weight:600;font-size:clamp(13px,1.4vw,17px);cursor:pointer;transition:.2s}
+.team button:hover{background:var(--wheat);color:var(--ink);border-color:var(--wheat);transform:translateY(-2px)}
+
+/* Student header */
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px}
+.head h2{font-size:clamp(26px,4vw,52px);font-weight:900;line-height:1.2}
+.axis{color:var(--wheat);font-weight:700;font-size:clamp(14px,1.8vw,22px);margin-top:4px}
+.badge{background:var(--wheat);color:var(--ink);font-weight:800;border-radius:12px;padding:6px 14px;font-size:clamp(13px,1.4vw,17px)}
+
+.body{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,22px);flex:1;align-content:start}
+.body.three{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(14px,2vw,26px)}
+.card h3{font-size:clamp(16px,1.9vw,24px);font-weight:800;color:var(--sky);margin-bottom:8px}
+.card p{font-size:clamp(14px,1.55vw,20px);line-height:1.95}
+.card.wide{grid-column:1/-1}
+.stat{display:flex;align-items:center;gap:clamp(14px,2.5vw,32px)}
+.stat b{font-size:clamp(44px,8vw,104px);font-weight:900;color:var(--wheat);line-height:1;white-space:nowrap}
+.stat p{flex:1}
+
+.source{display:flex;gap:12px;align-items:center;background:rgba(240,199,94,.12);border:1px solid rgba(240,199,94,.4);border-radius:14px;padding:12px 18px;font-size:clamp(13px,1.4vw,18px);line-height:1.7}
+.source strong{color:var(--wheat);white-space:nowrap}
+
+/* Conclusion */
+.rec{counter-reset:r;list-style:none;display:grid;gap:10px}
+.rec li{counter-increment:r;display:flex;gap:14px;align-items:flex-start;font-size:clamp(14px,1.55vw,20px);line-height:1.8}
+.rec li::before{content:counter(r);flex:none;width:34px;height:34px;border-radius:50%;background:var(--leaf);display:grid;place-items:center;font-weight:800}
+.ai{border-style:dashed}
+
+/* Controls */
+.bar{position:fixed;bottom:0;inset-inline:0;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,56px);
+  background:linear-gradient(to top,var(--soil) 60%,transparent);z-index:10}
+.dots{display:flex;gap:8px}
+.dots button{width:12px;height:12px;border-radius:50%;border:0;background:var(--line);cursor:pointer;transition:.25s}
+.dots button.on{width:34px;border-radius:8px;background:var(--wheat)}
+.nav{display:flex;gap:8px;align-items:center}
+.nav button{background:var(--card);color:var(--mist);border:1px solid var(--line);border-radius:12px;width:44px;height:44px;font-size:20px;cursor:pointer;font-family:inherit}
+.nav button:hover{background:var(--leaf)}
+.nav span{min-width:56px;text-align:center;font-weight:700;color:#a9c4b3}
+button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
+@media(max-width:760px){.body,.body.three{grid-template-columns:1fr}.stat{flex-direction:column;align-items:flex-start}.drone{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== Interactivity & color ===== */
+.s1{--accent:#7fd1c7}.s2{--accent:#f0c75e}.s3{--accent:#ff9f7a}.s4{--accent:#b79cff}.s5{--accent:#8fd36b}
+.slide::before{background:radial-gradient(900px 500px at 10% 0%,color-mix(in srgb,var(--accent,#2f8f5b) 30%,transparent),transparent 60%),radial-gradient(700px 400px at 100% 100%,rgba(127,209,199,.12),transparent 60%)}
+#prog{position:fixed;top:0;right:0;height:5px;width:0;background:var(--wheat);z-index:20;transition:width .5s,background .5s;border-radius:0 0 0 4px}
+.card{cursor:pointer;transition:background .3s,border-color .3s,transform .3s,opacity .3s,color .3s;-webkit-tap-highlight-color:transparent}
+.card h3{color:var(--accent,var(--sky));transition:color .3s}
+.card:hover{border-color:var(--accent,var(--sky));background:color-mix(in srgb,var(--accent,#7fd1c7) 16%,transparent);transform:translateY(-4px)}
+.card:active{transform:scale(.985)}
+.card.sel{background:var(--accent,var(--sky));border-color:var(--accent,var(--sky));color:var(--ink);transform:scale(1.015)}
+.card.sel h3,.card.sel b{color:var(--ink)}
+.card.sel p{font-weight:600}
+.body.has-sel .card:not(.sel){opacity:.35}
+.stat b{color:var(--accent,var(--wheat));transition:color .3s;font-variant-numeric:tabular-nums}
+.badge{background:var(--accent,var(--wheat))}
+.axis{color:var(--accent,var(--wheat))}
+.head{border-bottom-color:var(--accent,var(--line))}
+.source{cursor:pointer;transition:.3s;border-color:color-mix(in srgb,var(--accent,#f0c75e) 55%,transparent);background:color-mix(in srgb,var(--accent,#f0c75e) 12%,transparent)}
+.source strong{color:var(--accent,var(--wheat))}
+.source:hover,.source.sel{background:var(--accent,var(--wheat));color:var(--ink)}
+.source:hover strong,.source.sel strong{color:var(--ink)}
+.rec li{cursor:pointer;padding:6px 10px;border-radius:12px;transition:.3s}
+.rec li:hover{background:rgba(143,211,107,.18)}
+.rec li::before{background:var(--accent,var(--leaf));color:var(--ink)}
+.team button{border-color:var(--c);display:flex;align-items:center;gap:8px}
+.team button::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+.team button:hover{background:var(--c);color:var(--ink);border-color:var(--c)}
+.team button:hover::before{background:var(--ink)}
+.dots button:hover{background:var(--wheat)}
+.nav button:active{transform:scale(.9)}
+.hint{color:#a9c4b3;font-size:clamp(12px,1.2vw,15px);margin-top:6px}
+
+/* ===== Wow layer ===== */
+.pt{position:absolute!important;inset:0;width:100%;height:100%;z-index:0!important;pointer-events:none}
+.dsvg{display:block;width:100%}
+.beam{position:absolute;top:92%;left:50%;width:230%;height:280px;transform:translateX(-50%);
+  background:linear-gradient(rgba(127,209,199,.5),transparent);clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);animation:pulse 2.4s ease-in-out infinite;pointer-events:none}
+@keyframes pulse{50%{opacity:.35}}
+.cover h1{background:linear-gradient(90deg,#eaf3ec,#f0c75e,#7fd1c7,#eaf3ec);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 9s linear infinite}
+@keyframes shine{to{background-position:-300% 0}}
+.ic{display:inline-block;font-size:1.35em;margin-inline-end:10px;vertical-align:-2px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));transition:transform .3s}
+.card:hover .ic{transform:scale(1.3) rotate(-8deg)}
+.card{position:relative;isolation:isolate;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent,#7fd1c7) 35%,transparent),transparent 65%)}
+.card:hover::before{opacity:1}
+.card.sel::before{opacity:0}
+.sw,.stat>div{flex:1}
+.meter{height:14px;background:rgba(255,255,255,.14);border-radius:8px;margin-top:14px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--accent,var(--wheat));border-radius:8px;transition:width 1.4s .4s cubic-bezier(.2,.8,.2,1)}
+.slide.active .meter i{width:var(--w)}
+.card.sel .meter{background:rgba(0,0,0,.2)}.card.sel .meter i{background:var(--ink)}
+@keyframes rise{from{opacity:0;transform:translateY(34px)}}
+.slide.active .head{animation:rise .6s backwards}
+.slide.active .card,.slide.active .source{animation:rise .7s backwards}
+.slide.active .card:nth-child(1){animation-delay:.15s}.slide.active .card:nth-child(2){animation-delay:.3s}
+.slide.active .card:nth-child(3){animation-delay:.45s}.slide.active .source{animation-delay:.6s}
+
+.credit{position:absolute;left:50%;transform:translateX(-50%);bottom:6px;font-size:clamp(10px,1vw,13px);color:#8fb09c;letter-spacing:.3px;white-space:nowrap;pointer-events:none;font-family:'Segoe UI',Tahoma,sans-serif}
+.credit strong{color:var(--wheat);font-weight:700}
+@media(max-width:760px){.credit{bottom:2px}.bar{height:74px;padding-bottom:14px}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<main class="deck" id="deck">
+
+<!-- 1: Cover -->
+<section class="slide cover active">
+  <canvas id="pt" class="pt"></canvas>
+  <div class="rows"></div>
+  <div class="drone"><svg class="dsvg" viewBox="0 0 120 70" fill="none" stroke="#f0c75e" stroke-width="4" stroke-linecap="round"><rect x="40" y="26" width="40" height="18" rx="8" fill="#10261f"/><path d="M10 14h30M80 14h30M25 14v12M95 14v12M60 44v10"/><circle cx="60" cy="58" r="4" fill="#7fd1c7" stroke="none"/></svg><div class="beam"></div></div>
+  <h1>دور تطبيقات الذكاء الاصطناعي في تطوير الزراعة الحديثة</h1>
+  <div class="sub">الفرص والتحديات</div>
+  <p class="abstract">تشهد الزراعة العالمية حالياً تحولاً جذرياً بفضل الاعتماد على التقنيات الرقمية المتقدمة مثل الذكاء الاصطناعي وإنترنت الأشياء. يهدف هذا البحث إلى دراسة كيفية توظيف هذه التقنيات لزيادة الإنتاجية وتقليل هدر الموارد، مع تسليط الضوء على التحديات الاقتصادية والتشريعية التي تواجه تطبيقها في الواقع العملي.</p>
+  <div class="hint">اضغط على اسمك للانتقال لصفحتك مباشرة</div>
+  <div class="team"><button data-go="1" style="--c:#7fd1c7">مصطفى محمد عبدالجليل</button><button data-go="2" style="--c:#f0c75e">مروان رفيق</button><button data-go="3" style="--c:#ff9f7a">هاني عاطف</button><button data-go="4" style="--c:#b79cff">محمود عماد</button></div>
+</section>
+
+<!-- 2: Student 1 -->
+<section class="slide s1">
+  <div class="head"><div><h2>مصطفى محمد عبدالجليل</h2><div class="axis">التطور التقني وحدود القدرات</div></div></div>
+  <div class="body">
+    <div class="card wide"><h3><span class="ic">🛰️</span>الشرح التقني</h3><p>يعتمد الذكاء الاصطناعي في الزراعة على تقنيات «رؤية الحاسوب» (Computer Vision) وأنظمة التعلم الآلي؛ حيث تقوم الطائرات المسيرة (Drones) وكاميرات الحقول بالتقاط صور دقيقة للمحاصيل وتحليلها فوراً لاكتشاف الآفات أو نقص العناصر الغذائية قبل انتشارها. كما تعتمد أنظمة «الري الذكي» على شبكة من أجهزة الاستشعار تحت التربة لقياس نسبة الرطوبة وضخ الكمية الدقيقة للمياه دون إهدار.</p></div>
+    <div class="card"><h3><span class="ic">⚠️</span>حدود القدرات التقنية</h3><p>تتأثر الكاميرات بالعوامل الجوية الشديدة (كالعواصف والأتربة الكثيفة)، وتحتاج الخوارزميات إلى اتصال دائم بالإنترنت وبنية تحتية قوية قد لا تتوفر بسهولة في بعض المناطق الريفية.</p></div>
+    <div class="card stat"><b>30%</b><div class="sw"><p>أقصى نسبة لتقليل استهلاك المياه بفضل أنظمة الزراعة الدقيقة.</p><div class="meter"><i style="--w:30%"></i></div></div></div>
+  </div>
+  <div class="source"><strong>المصدر الموثق:</strong><span>كتاب «الزراعة الذكية وتحديات المستقبل» للدكتور محمد عبد الفتاح (ص 45)</span></div>
+</section>
+
+<!-- 3: Student 2 -->
+<section class="slide s2">
+  <div class="head"><div><h2>مروان رفيق</h2><div class="axis">التطبيقات العملية والمقارنة</div></div></div>
+  <div class="body">
+    <div class="card"><h3><span class="ic">📱</span>تطبيقات الهواتف الذكية لتشخيص أمراض النبات</h3><p>تمكّن المزارع من تصوير الورقة المصابة ليقوم التطبيق بتشخيص المرض ووصف العلاج بدقة.</p></div>
+    <div class="card"><h3><span class="ic">🚜</span>الجرارات ذاتية القيادة</h3><p>تعمل عبر نظام تحديد الموقع الجغرافي (GPS) لحراثة الأراضي وزراعة البذور دون تدخل بشري مباشر لتقليل نسبة الخطأ.</p></div>
+    <div class="card wide stat"><b>+85%</b><div><h3><span class="ic">⚖️</span>مقارنة واقعية</h3><p>الزراعة التقليدية تعتمد على التخمين البشري والري اليدوي، بينما توفر الزراعة المعتمدة على الذكاء الاصطناعي دقة تتجاوز 85% في التنبؤ بحجم المحصول ومواعيد الحصاد المثلى.</p><div class="meter"><i style="--w:85%"></i></div></div></div>
+  </div>
+  <div class="source"><strong>المصدر الموثق:</strong><span>كتاب «تطبيقات الذكاء الاصطناعي في التنمية المستدامة» للباحث أحمد السعيد (ص 112)</span></div>
+</section>
+
+<!-- 4: Student 3 -->
+<section class="slide s3">
+  <div class="head"><div><h2>هاني عاطف</h2><div class="axis">الاقتصاد والمال والوظائف</div></div></div>
+  <div class="body">
+    <div class="card"><h3><span class="ic">💰</span>التحليل المالي</h3><p>يتطلب التحول إلى الزراعة الذكية استثمارات أولية مرتفعة لشراء أجهزة الاستشعار والطائرات المسيرة، مما يمثل عبئاً على صغار المزارعين. ومع ذلك، يظهر العائد الاستثماري بوضوح على المدى المتوسط.</p></div>
+    <div class="card stat"><b>25–35%</b><div class="sw"><p>انخفاض في تكاليف الأسمدة والمياه حسب الدراسات.</p><div class="meter"><i style="--w:10%;margin-inline-start:25%"></i></div></div></div>
+    <div class="card wide"><h3><span class="ic">👩‍🌾</span>تأثيرها على الوظائف</h3><p>لا يلغي الذكاء الاصطناعي دور المزارع بالكامل، بل يغير طبيعة العمل؛ حيث يظهر احتياج جديد لمهندسين زراعيين قادرين على تحليل البيانات وبرمجة الأنظمة، مما يتطلب برامج تدريبية للعمالة الحالية لرفع كفاءتهم الرقمية.</p></div>
+  </div>
+  <div class="source"><strong>المصدر الموثق:</strong><span>تقرير منظمة الأغذية والزراعة للأمم المتحدة (FAO) حول «الابتكار التكنولوجي في النظم الزراعية»</span></div>
+</section>
+
+<!-- 5: Student 4 -->
+<section class="slide s4">
+  <div class="head"><div><h2>محمود عماد</h2><div class="axis">التحيز، الخصوصية، والتشريعات</div></div></div>
+  <div class="body three">
+    <div class="card"><h3><span class="ic">🔒</span>خصوصية البيانات الزراعية</h3><p>يؤدي جمع بيانات دقيقة عن نوعية التربة وحجم المحاصيل والملكية الزراعية عبر التطبيقات إلى مخاطر تتعلق بخصوصية المزارعين وأمن البيانات، وإمكانية استغلالها تجارياً دون إذنهم.</p></div>
+    <div class="card"><h3><span class="ic">🧭</span>التحيز الخوارزمي</h3><p>بعض نماذج الذكاء الاصطناعي تُبرمج بناءً على بيانات بيئية لدول أوروبية أو متقدمة، مما يجعلها غير دقيقة تماماً عند تطبيقها في بيئة زراعية عربية أو صحراوية.</p></div>
+    <div class="card"><h3><span class="ic">📜</span>المبدأ التنظيمي</h3><p>تتطلب الاستفادة من هذه التكنولوجيا وضع تشريعات واضحة تحمي ملكية المزارع الصغير وتمنع احتكار الشركات التقنية الكبرى لبيانات الغذاء.</p></div>
+  </div>
+</section>
+
+<!-- 6: Conclusion -->
+<section class="slide s5">
+  <div class="head"><div><h2>الاستنتاج والتوصيات</h2><div class="axis">الفريق بالكامل</div></div></div>
+  <div class="body">
+    <div class="card wide"><h3><span class="ic">🌾</span>الاستنتاج</h3><p>أثبت البحث أن الذكاء الاصطناعي ليس مجرد رفاهية تقنية، بل هو أداة رئيسية لتعظيم الإنتاج الزراعي في ظل ندرة الموارد المائية والتغير المناخي.</p></div>
+    <div class="card wide"><h3><span class="ic">✅</span>التوصيات</h3>
+      <ol class="rec"><li>إنشاء وحدات إرشادية حكومية لمساعدة صغار المزارعين في استخدام هذه التقنيات.</li><li>توفير برامج تدريبية لطلاب الزراعة على تقنيات «الزراعة الرقمية».</li></ol></div>
+    <div class="card wide ai"><h3><span class="ic">🤖</span>إقرار استخدام الذكاء الاصطناعي</h3><p>يُقر الفريق بأنه تم الاستعانة بأدوات الذكاء الاصطناعي كمساعد في تنظيم الأفكار وصياغة وترتيب فقرات البحث، مع مراجعة جميع المصادر والأرقام والتأكد من صحتها يدوياً.</p></div>
+  </div>
+</section>
+</main>
+
+<div class="bar">
+  <div class="dots" id="dots"></div>
+  <div class="credit" dir="ltr">Designed &amp; developed by <strong>Mustafa Muhammad Abdul Jalil</strong></div>
+  <div class="nav">
+    <button id="next" aria-label="التالي">›</button><span id="count"></span><button id="prev" aria-label="السابق">‹</button>
+    <button id="fs" aria-label="ملء الشاشة">⛶</button>
+  </div>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')],dots=document.getElementById('dots'),count=document.getElementById('count');
+let i=0;
+slides.forEach((_,n)=>{const b=document.createElement('button');b.setAttribute('aria-label','شريحة '+(n+1));b.onclick=()=>go(n);dots.appendChild(b)});
+function go(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>{s.classList.toggle('active',k===i);s.classList.toggle('prev',k<i);if(k===i)s.scrollTop=0});
+  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+  count.textContent=(i+1)+' / '+slides.length;
+  history.replaceState(null,'','#'+(i+1));
+}
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go));
+document.getElementById('next').onclick=()=>go(i+1);
+document.getElementById('prev').onclick=()=>go(i-1);
+document.getElementById('fs').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+addEventListener('keydown',e=>{
+  if(['ArrowLeft','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}
+  if(['ArrowRight','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}
+  if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);
+});
+let x0=null;
+addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(d<0?i+1:i-1);x0=null});
+go((parseInt(location.hash.slice(1))||1)-1);
+
+// ---- color + count-up + card focus ----
+const prog=document.getElementById('prog');
+const stats=[...document.querySelectorAll('.stat b')];stats.forEach(b=>b.dataset.t=b.textContent);
+function countUp(sl){
+  sl.querySelectorAll('.stat b').forEach(b=>{
+    const t=b.dataset.t,t0=performance.now();
+    (function f(now){const k=Math.min(1,(now-t0)/1100),e=1-Math.pow(1-k,3);
+      b.textContent=t.replace(/\d+/g,m=>Math.round(+m*e));
+      if(k<1)requestAnimationFrame(f)})(t0);
+  });
+}
+const _go=go;
+go=function(n){
+  _go(n);
+  const sl=slides[i],c=getComputedStyle(sl).getPropertyValue('--accent').trim()||'#f0c75e';
+  prog.style.width=((i+1)/slides.length*100)+'%';prog.style.background=c;
+  document.querySelectorAll('.dots button.on').forEach(d=>d.style.background=c);
+  [...dots.children].forEach(d=>{if(!d.classList.contains('on'))d.style.background=''});
+  document.querySelectorAll('.card.sel,.source.sel').forEach(x=>x.classList.remove('sel'));
+  document.querySelectorAll('.has-sel').forEach(x=>x.classList.remove('has-sel'));
+  countUp(sl);
+};
+document.querySelectorAll('.card,.source').forEach(c=>c.addEventListener('click',()=>{
+  const body=c.closest('.body'),on=!c.classList.contains('sel');
+  if(body){body.querySelectorAll('.card.sel').forEach(x=>x.classList.remove('sel'));body.classList.toggle('has-sel',on)}
+  c.classList.toggle('sel',on);
+}));
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go));
+document.getElementById('next').onclick=()=>go(i+1);
+document.getElementById('prev').onclick=()=>go(i-1);
+[...dots.children].forEach((d,n)=>d.onclick=()=>go(n));
+go(i);
+
+// ---- spotlight + particles ----
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('mousemove',e=>{
+  const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+const cv=document.getElementById('pt'),cx=cv.getContext('2d');let pts=[];
+function rs(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;pts=Array.from({length:55},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*2.6+.8,v:Math.random()*.5+.15,c:Math.random()>.5?'240,199,94':'127,209,199'}))}
+addEventListener('resize',rs);rs();
+(function tick(){
+  if(i===0){cx.clearRect(0,0,cv.width,cv.height);
+    pts.forEach(p=>{p.y-=p.v;p.x+=Math.sin(p.y/40)*.3;if(p.y<-5){p.y=cv.height+5;p.x=Math.random()*cv.width}
+      cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle='rgba('+p.c+',.55)';cx.fill()})}
+  requestAnimationFrame(tick)})();
+</script>
+</body>
+</html>
