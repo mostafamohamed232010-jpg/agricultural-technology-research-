@@ -7,8 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --soil:#10261f; --leaf:#2f8f5b; --wheat:#f0c75e; --mist:#eaf3ec; --sky:#7fd1c7; --ink:#0c1f19;
-  --card:rgba(255,255,255,.07); --line:rgba(234,243,236,.18);
+  --soil:#0a1428; --leaf:#10b981; --wheat:#fbbf24; --mist:#eef6ff; --sky:#22d3ee; --ink:#06101f;
+  --card:rgba(255,255,255,.07); --line:rgba(238,246,255,.18);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--soil);color:var(--mist);font-family:'Cairo','Segoe UI',Tahoma,sans-serif;overflow:hidden}
@@ -18,7 +18,7 @@ html,body{height:100%;background:var(--soil);color:var(--mist);font-family:'Cair
 .slide.active{opacity:1;visibility:visible;transform:none}
 .slide.prev{transform:translateX(40px)}
 .slide::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(900px 500px at 10% 0%,rgba(47,143,91,.35),transparent 60%),radial-gradient(700px 400px at 100% 100%,rgba(127,209,199,.12),transparent 60%)}
+  background:radial-gradient(900px 500px at 10% 0%,rgba(16,185,129,.35),transparent 60%),radial-gradient(700px 400px at 100% 100%,rgba(34,211,238,.12),transparent 60%)}
 .slide>*{position:relative;z-index:1}
 
 /* Cover */
@@ -26,14 +26,14 @@ html,body{height:100%;background:var(--soil);color:var(--mist);font-family:'Cair
 .rows{position:absolute!important;inset:auto 0 0 0;height:46%;z-index:0!important;overflow:hidden;
   mask-image:linear-gradient(to top,#000 20%,transparent)}
 .rows::before{content:"";position:absolute;inset:0;
-  background:repeating-linear-gradient(100deg,transparent 0 38px,rgba(47,143,91,.55) 38px 44px);
+  background:repeating-linear-gradient(100deg,transparent 0 38px,rgba(16,185,129,.55) 38px 44px);
   transform:perspective(500px) rotateX(58deg) scale(1.8);transform-origin:bottom;animation:grow 14s linear infinite}
 @keyframes grow{to{background-position:-88px 0}}
 .drone{position:absolute!important;top:12%;left:9%;width:clamp(70px,10vw,130px);animation:hover 4s ease-in-out infinite;z-index:1}
 @keyframes hover{50%{transform:translate(18px,-14px) rotate(-4deg)}}
 .cover h1{font-size:clamp(30px,5.6vw,72px);font-weight:900;line-height:1.25;max-width:16ch}
 .cover .sub{color:var(--wheat);font-size:clamp(16px,2.2vw,28px);font-weight:600;margin-top:4px}
-.abstract{max-width:62ch;font-size:clamp(14px,1.5vw,19px);line-height:1.9;color:#cfe3d6;margin-top:10px;border-right:4px solid var(--wheat);padding-right:16px}
+.abstract{max-width:62ch;font-size:clamp(14px,1.5vw,19px);line-height:1.9;color:#cbd9ee;margin-top:10px;border-right:4px solid var(--wheat);padding-right:16px}
 .team{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
 .team button{background:var(--card);color:var(--mist);border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-family:inherit;font-weight:600;font-size:clamp(13px,1.4vw,17px);cursor:pointer;transition:.2s}
 .team button:hover{background:var(--wheat);color:var(--ink);border-color:var(--wheat);transform:translateY(-2px)}
@@ -54,7 +54,7 @@ html,body{height:100%;background:var(--soil);color:var(--mist);font-family:'Cair
 .stat b{font-size:clamp(44px,8vw,104px);font-weight:900;color:var(--wheat);line-height:1;white-space:nowrap}
 .stat p{flex:1}
 
-.source{display:flex;gap:12px;align-items:center;background:rgba(240,199,94,.12);border:1px solid rgba(240,199,94,.4);border-radius:14px;padding:12px 18px;font-size:clamp(13px,1.4vw,18px);line-height:1.7}
+.source{display:flex;gap:12px;align-items:center;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.4);border-radius:14px;padding:12px 18px;font-size:clamp(13px,1.4vw,18px);line-height:1.7}
 .source strong{color:var(--wheat);white-space:nowrap}
 
 /* Conclusion */
@@ -72,18 +72,18 @@ html,body{height:100%;background:var(--soil);color:var(--mist);font-family:'Cair
 .nav{display:flex;gap:8px;align-items:center}
 .nav button{background:var(--card);color:var(--mist);border:1px solid var(--line);border-radius:12px;width:44px;height:44px;font-size:20px;cursor:pointer;font-family:inherit}
 .nav button:hover{background:var(--leaf)}
-.nav span{min-width:56px;text-align:center;font-weight:700;color:#a9c4b3}
+.nav span{min-width:56px;text-align:center;font-weight:700;color:#9fb2cf}
 button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 @media(max-width:760px){.body,.body.three{grid-template-columns:1fr}.stat{flex-direction:column;align-items:flex-start}.drone{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ===== Interactivity & color ===== */
-.s1{--accent:#7fd1c7}.s2{--accent:#f0c75e}.s3{--accent:#ff9f7a}.s4{--accent:#b79cff}.s5{--accent:#8fd36b}
-.slide::before{background:radial-gradient(900px 500px at 10% 0%,color-mix(in srgb,var(--accent,#2f8f5b) 30%,transparent),transparent 60%),radial-gradient(700px 400px at 100% 100%,rgba(127,209,199,.12),transparent 60%)}
+.s1{--accent:#22d3ee}.s2{--accent:#fbbf24}.s3{--accent:#fb7185}.s4{--accent:#a78bfa}.s5{--accent:#34d399}
+.slide::before{background:radial-gradient(900px 500px at 10% 0%,color-mix(in srgb,var(--accent,#10b981) 30%,transparent),transparent 60%),radial-gradient(700px 400px at 100% 100%,rgba(34,211,238,.12),transparent 60%)}
 #prog{position:fixed;top:0;right:0;height:5px;width:0;background:var(--wheat);z-index:20;transition:width .5s,background .5s;border-radius:0 0 0 4px}
 .card{cursor:pointer;transition:background .3s,border-color .3s,transform .3s,opacity .3s,color .3s;-webkit-tap-highlight-color:transparent}
 .card h3{color:var(--accent,var(--sky));transition:color .3s}
-.card:hover{border-color:var(--accent,var(--sky));background:color-mix(in srgb,var(--accent,#7fd1c7) 16%,transparent);transform:translateY(-4px)}
+.card:hover{border-color:var(--accent,var(--sky));background:color-mix(in srgb,var(--accent,#22d3ee) 16%,transparent);transform:translateY(-4px)}
 .card:active{transform:scale(.985)}
 .card.sel{background:var(--accent,var(--sky));border-color:var(--accent,var(--sky));color:var(--ink);transform:scale(1.015)}
 .card.sel h3,.card.sel b{color:var(--ink)}
@@ -93,12 +93,12 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 .badge{background:var(--accent,var(--wheat))}
 .axis{color:var(--accent,var(--wheat))}
 .head{border-bottom-color:var(--accent,var(--line))}
-.source{cursor:pointer;transition:.3s;border-color:color-mix(in srgb,var(--accent,#f0c75e) 55%,transparent);background:color-mix(in srgb,var(--accent,#f0c75e) 12%,transparent)}
+.source{cursor:pointer;transition:.3s;border-color:color-mix(in srgb,var(--accent,#fbbf24) 55%,transparent);background:color-mix(in srgb,var(--accent,#fbbf24) 12%,transparent)}
 .source strong{color:var(--accent,var(--wheat))}
 .source:hover,.source.sel{background:var(--accent,var(--wheat));color:var(--ink)}
 .source:hover strong,.source.sel strong{color:var(--ink)}
 .rec li{cursor:pointer;padding:6px 10px;border-radius:12px;transition:.3s}
-.rec li:hover{background:rgba(143,211,107,.18)}
+.rec li:hover{background:rgba(52,211,153,.18)}
 .rec li::before{background:var(--accent,var(--leaf));color:var(--ink)}
 .team button{border-color:var(--c);display:flex;align-items:center;gap:8px}
 .team button::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
@@ -106,21 +106,21 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 .team button:hover::before{background:var(--ink)}
 .dots button:hover{background:var(--wheat)}
 .nav button:active{transform:scale(.9)}
-.hint{color:#a9c4b3;font-size:clamp(12px,1.2vw,15px);margin-top:6px}
+.hint{color:#9fb2cf;font-size:clamp(12px,1.2vw,15px);margin-top:6px}
 
 /* ===== Wow layer ===== */
 .pt{position:absolute!important;inset:0;width:100%;height:100%;z-index:0!important;pointer-events:none}
 .dsvg{display:block;width:100%}
 .beam{position:absolute;top:92%;left:50%;width:230%;height:280px;transform:translateX(-50%);
-  background:linear-gradient(rgba(127,209,199,.5),transparent);clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);animation:pulse 2.4s ease-in-out infinite;pointer-events:none}
+  background:linear-gradient(rgba(34,211,238,.5),transparent);clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);animation:pulse 2.4s ease-in-out infinite;pointer-events:none}
 @keyframes pulse{50%{opacity:.35}}
-.cover h1{background:linear-gradient(90deg,#eaf3ec,#f0c75e,#7fd1c7,#eaf3ec);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 9s linear infinite}
+.cover h1{background:linear-gradient(90deg,#eef6ff,#fbbf24,#22d3ee,#eef6ff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 9s linear infinite}
 @keyframes shine{to{background-position:-300% 0}}
 .ic{display:inline-block;font-size:1.35em;margin-inline-end:10px;vertical-align:-2px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));transition:transform .3s}
 .card:hover .ic{transform:scale(1.3) rotate(-8deg)}
 .card{position:relative;isolation:isolate;overflow:hidden}
 .card::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;
-  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent,#7fd1c7) 35%,transparent),transparent 65%)}
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent,#22d3ee) 35%,transparent),transparent 65%)}
 .card:hover::before{opacity:1}
 .card.sel::before{opacity:0}
 .sw,.stat>div{flex:1}
@@ -134,31 +134,120 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 .slide.active .card:nth-child(1){animation-delay:.15s}.slide.active .card:nth-child(2){animation-delay:.3s}
 .slide.active .card:nth-child(3){animation-delay:.45s}.slide.active .source{animation-delay:.6s}
 
-.credit{position:absolute;left:50%;transform:translateX(-50%);bottom:6px;font-size:clamp(10px,1vw,13px);color:#8fb09c;letter-spacing:.3px;white-space:nowrap;pointer-events:none;font-family:'Segoe UI',Tahoma,sans-serif}
+.credit{position:absolute;left:50%;transform:translateX(-50%);bottom:6px;font-size:clamp(10px,1vw,13px);color:#8da3c2;letter-spacing:.3px;white-space:nowrap;pointer-events:none;font-family:'Segoe UI',Tahoma,sans-serif}
 .credit strong{color:var(--wheat);font-weight:700}
 @media(max-width:760px){.credit{bottom:2px}.bar{height:74px;padding-bottom:14px}}
 .nav button.txt{letter-spacing:.6px;font-family:'Segoe UI',Tahoma,sans-serif;width:auto;padding:0 16px;font-size:clamp(13px,1.3vw,16px);font-weight:700;white-space:nowrap}
+
+/* ===== Polish v2 ===== */
+html,body{background-color:var(--soil);background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);background-size:26px 26px}
+.slide:not(.cover)>*{width:100%;max-width:1240px;margin-inline:auto}
+.slide:not(.cover){justify-content:center;gap:clamp(14px,2.4vh,28px)}
+.head{align-items:center;border-bottom:0;padding-bottom:0}
+.head>div:first-child{display:grid;grid-template-columns:auto 1fr;column-gap:clamp(14px,2vw,24px);align-items:center}
+.av{grid-row:1/3;width:clamp(54px,6vw,80px);height:clamp(54px,6vw,80px);border-radius:22px;background:var(--accent,var(--wheat));color:var(--ink);
+  display:grid;place-items:center;font-weight:900;font-size:clamp(26px,3.2vw,42px);box-shadow:0 14px 34px -12px var(--accent,var(--wheat));transform:rotate(-6deg)}
+.head h2{text-shadow:0 4px 24px rgba(0,0,0,.4)}
+.axis{font-weight:800;letter-spacing:.2px}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.03));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.14);border-radius:24px;box-shadow:0 22px 44px -26px rgba(0,0,0,.8);padding:clamp(18px,2.4vw,32px)}
+.card::after{content:"";position:absolute;top:0;inset-inline:0;height:4px;background:linear-gradient(90deg,var(--accent,#22d3ee),transparent)}
+.card.sel::after{opacity:0}
+.card h3{display:flex;align-items:center;font-size:clamp(17px,2vw,26px);margin-bottom:12px}
+.card p{color:#dbe6f5;line-height:2.05}
+.card.sel p{color:var(--ink)}
+.ic{display:inline-grid;place-items:center;width:1.9em;height:1.9em;flex:none;font-size:1.15em;border-radius:14px;margin-inline-end:12px;vertical-align:middle;
+  background:color-mix(in srgb,var(--accent,#22d3ee) 22%,transparent);filter:none}
+.card.sel .ic{background:rgba(0,0,0,.14)}
+.stat b{text-shadow:0 0 36px color-mix(in srgb,var(--accent,#fbbf24) 55%,transparent)}
+.card.sel b{text-shadow:none}
+.meter{height:16px;box-shadow:inset 0 2px 6px rgba(0,0,0,.35)}
+.meter i{box-shadow:0 0 18px var(--accent,var(--wheat))}
+.source{border-radius:18px;padding:16px 22px;backdrop-filter:blur(8px)}
+.source::before{content:"📚";font-size:1.5em}
+.abstract{background:rgba(255,255,255,.06);border-radius:18px;padding:18px 22px;backdrop-filter:blur(8px);border-right-width:5px}
+.cover h1{filter:drop-shadow(0 8px 30px rgba(0,0,0,.35))}
+.team{gap:12px;margin-top:20px}
+.team button{padding:12px 22px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.04));backdrop-filter:blur(8px);border-width:1.5px;box-shadow:0 12px 28px -16px var(--c)}
+.team button::before{width:12px;height:12px;box-shadow:0 0 12px var(--c)}
+.hint{margin-top:18px}
+.bar{background:rgba(10,20,40,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.nav button{border-radius:14px;backdrop-filter:blur(6px)}
+.rec li{background:rgba(255,255,255,.05);padding:12px 16px}
+.rec li::before{box-shadow:0 6px 16px -6px var(--accent,#34d399)}
+@media(max-width:760px){.head>div:first-child{grid-template-columns:auto 1fr}.slide:not(.cover){justify-content:flex-start}}
+
+/* ===== Motion v3 ===== */
+.slide{transform:perspective(1400px) rotateY(28deg) translateX(-70px) scale(.93);transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.2,1),visibility .7s}
+.slide.prev{transform:perspective(1400px) rotateY(-28deg) translateX(70px) scale(.93)}
+.slide.active{transform:none}
+.s6{--accent:#6ea8ff}
+.fl{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fl span{position:absolute;bottom:-60px;opacity:.16;animation:floatup linear infinite}
+@keyframes floatup{to{transform:translateY(-115vh) rotate(360deg)}}
+.orb{position:fixed;width:380px;height:380px;border-radius:50%;left:0;top:0;z-index:0;pointer-events:none;margin:-190px 0 0 -190px;
+  background:radial-gradient(circle,rgba(251,191,36,.16),transparent 65%);transition:transform .35s ease-out}
+.sun{position:absolute!important;top:5%;right:6%;font-size:clamp(44px,6.5vw,92px);z-index:0!important;animation:spin 40s linear infinite;filter:drop-shadow(0 0 30px rgba(251,191,36,.8))}
+@keyframes spin{to{transform:rotate(360deg)}}
+.plants{position:absolute!important;bottom:2%;inset-inline:0;display:flex;justify-content:space-around;z-index:0!important;pointer-events:none;font-size:clamp(30px,4.4vw,60px)}
+.plants span{display:block;transform-origin:bottom;opacity:0;animation:sprout 4s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes sprout{0%{transform:scale(0);opacity:0}30%{transform:scale(1);opacity:1}75%{opacity:1}100%{transform:scale(1.12) translateY(-8px);opacity:0}}
+.card:not(.nosel):hover{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-6px)}
+.nosel{cursor:default}
+.nosel:hover{transform:none!important}
+.team button{animation:bob 3.2s ease-in-out infinite}
+.team button:nth-child(2){animation-delay:.4s}.team button:nth-child(3){animation-delay:.8s}.team button:nth-child(4){animation-delay:1.2s}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.team button:hover{animation-play-state:paused}
+.av{animation:wob 5s ease-in-out infinite}
+@keyframes wob{50%{transform:rotate(6deg) scale(1.06)}}
+/* python lab */
+.code,.term{font-family:Consolas,'Courier New',monospace;font-size:clamp(11px,1.25vw,16px);line-height:1.8;border-radius:14px;padding:14px 16px;overflow-x:auto;white-space:pre;text-align:left}
+.code{background:#0a1914;color:#9be7ff;border:1px solid var(--line)}
+.term{background:#050d0a;color:#34d399;border:1px solid rgba(52,211,153,.35);margin-top:12px;min-height:96px}
+.chip{display:inline-block;margin-top:12px;background:rgba(110,168,255,.2);color:#6ea8ff;border:1px solid #6ea8ff;border-radius:999px;padding:4px 14px;font-size:13px;font-weight:700}
+.fld{display:block;font-size:clamp(13px,1.4vw,17px);font-weight:600;margin-bottom:12px;color:#dbe6f5}
+.fld input[type=number]{display:block;width:100%;margin-top:6px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--mist);border-radius:12px;padding:10px 14px;font:inherit;font-size:16px}
+.fld input[type=range]{display:block;width:100%;margin-top:10px;accent-color:#6ea8ff}
+.fld b{color:#6ea8ff;font-size:1.2em}
+.run{background:#6ea8ff;color:#06182f;border:0;border-radius:14px;padding:12px 26px;font:inherit;font-weight:800;font-size:17px;cursor:pointer;box-shadow:0 12px 28px -12px #6ea8ff;transition:.2s}
+.run:hover{transform:translateY(-3px) scale(1.04)}.run:active{transform:scale(.96)}.run:disabled{opacity:.6;cursor:wait}
+.note{font-size:clamp(11px,1.15vw,14px)!important;color:#9fb2cf!important;margin-top:10px}
+.burst{position:fixed;bottom:-40px;font-size:30px;z-index:30;pointer-events:none;animation:fly 2.4s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--x),-105vh) rotate(540deg);opacity:0}}
+@media(max-width:760px){.nav button.txt{padding:0 10px;font-size:12px;height:40px}}
+@media(max-width:560px){.dots{display:none}.nav{width:100%;justify-content:space-between}}
+
+.pair{display:flex;gap:8px}
+html,body{background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(160deg,#0a1428 0%,#0b2236 55%,#0a2f2a 100%);background-size:26px 26px,100% 100%}
+.nav button#next{background:var(--wheat);color:#06101f;border-color:var(--wheat)}
+.nav button#next:hover{background:#fcd34d}
+#count{display:inline-block;min-width:54px;text-align:center;font-weight:800;color:var(--wheat);font-size:clamp(13px,1.4vw,17px);direction:ltr}
+@media(max-width:560px){.nav{gap:4px}.pair{gap:4px}.nav button.txt{padding:0 8px;font-size:11px;height:38px}#count{min-width:40px;font-size:12px}}
 </style>
 </head>
 <body>
 <div id="prog"></div>
+<div class="fl" id="fl"></div><div class="orb" id="orb"></div>
 <main class="deck" id="deck">
 
 <!-- 1: Cover -->
 <section class="slide cover active">
   <canvas id="pt" class="pt"></canvas>
   <div class="rows"></div>
-  <div class="drone"><svg class="dsvg" viewBox="0 0 120 70" fill="none" stroke="#f0c75e" stroke-width="4" stroke-linecap="round"><rect x="40" y="26" width="40" height="18" rx="8" fill="#10261f"/><path d="M10 14h30M80 14h30M25 14v12M95 14v12M60 44v10"/><circle cx="60" cy="58" r="4" fill="#7fd1c7" stroke="none"/></svg><div class="beam"></div></div>
+  <div class="sun">☀️</div>
+  <div class="plants"><span style="--d:0s">🌱</span><span style="--d:.5s">🌾</span><span style="--d:1.1s">🌿</span><span style="--d:.3s">🌱</span><span style="--d:1.6s">🌾</span><span style="--d:.9s">🌿</span><span style="--d:1.3s">🌱</span><span style="--d:.2s">🌾</span></div>
+  <div class="drone"><svg class="dsvg" viewBox="0 0 120 70" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"><rect x="40" y="26" width="40" height="18" rx="8" fill="#0a1428"/><path d="M10 14h30M80 14h30M25 14v12M95 14v12M60 44v10"/><circle cx="60" cy="58" r="4" fill="#22d3ee" stroke="none"/></svg><div class="beam"></div></div>
   <h1>دور تطبيقات الذكاء الاصطناعي في تطوير الزراعة الحديثة</h1>
   <div class="sub">الفرص والتحديات</div>
   <p class="abstract">تشهد الزراعة العالمية حالياً تحولاً جذرياً بفضل الاعتماد على التقنيات الرقمية المتقدمة مثل الذكاء الاصطناعي وإنترنت الأشياء. يهدف هذا البحث إلى دراسة كيفية توظيف هذه التقنيات لزيادة الإنتاجية وتقليل هدر الموارد، مع تسليط الضوء على التحديات الاقتصادية والتشريعية التي تواجه تطبيقها في الواقع العملي.</p>
   <div class="hint">اضغط على اسمك للانتقال لصفحتك مباشرة</div>
-  <div class="team"><button data-go="1" style="--c:#7fd1c7">مصطفى محمد عبدالجليل</button><button data-go="2" style="--c:#f0c75e">مروان رفيق</button><button data-go="3" style="--c:#ff9f7a">هاني عاطف</button><button data-go="4" style="--c:#b79cff">محمود عماد</button></div>
+  <div class="team"><button data-go="1" style="--c:#22d3ee">مصطفى محمد عبدالجليل</button><button data-go="2" style="--c:#fbbf24">مروان رفيق</button><button data-go="3" style="--c:#fb7185">هاني عاطف</button><button data-go="4" style="--c:#a78bfa">محمود عماد</button></div>
 </section>
 
 <!-- 2: Student 1 -->
 <section class="slide s1">
-  <div class="head"><div><h2>مصطفى محمد عبدالجليل</h2><div class="axis">التطور التقني وحدود القدرات</div></div></div>
+  <div class="head"><div><span class="av">م</span><h2>مصطفى محمد عبدالجليل</h2><div class="axis">التطور التقني وحدود القدرات</div></div></div>
   <div class="body">
     <div class="card wide"><h3><span class="ic">🛰️</span>الشرح التقني</h3><p>يعتمد الذكاء الاصطناعي في الزراعة على تقنيات «رؤية الحاسوب» (Computer Vision) وأنظمة التعلم الآلي؛ حيث تقوم الطائرات المسيرة (Drones) وكاميرات الحقول بالتقاط صور دقيقة للمحاصيل وتحليلها فوراً لاكتشاف الآفات أو نقص العناصر الغذائية قبل انتشارها. كما تعتمد أنظمة «الري الذكي» على شبكة من أجهزة الاستشعار تحت التربة لقياس نسبة الرطوبة وضخ الكمية الدقيقة للمياه دون إهدار.</p></div>
     <div class="card"><h3><span class="ic">⚠️</span>حدود القدرات التقنية</h3><p>تتأثر الكاميرات بالعوامل الجوية الشديدة (كالعواصف والأتربة الكثيفة)، وتحتاج الخوارزميات إلى اتصال دائم بالإنترنت وبنية تحتية قوية قد لا تتوفر بسهولة في بعض المناطق الريفية.</p></div>
@@ -169,7 +258,7 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 
 <!-- 3: Student 2 -->
 <section class="slide s2">
-  <div class="head"><div><h2>مروان رفيق</h2><div class="axis">التطبيقات العملية والمقارنة</div></div></div>
+  <div class="head"><div><span class="av">م</span><h2>مروان رفيق</h2><div class="axis">التطبيقات العملية والمقارنة</div></div></div>
   <div class="body">
     <div class="card"><h3><span class="ic">📱</span>تطبيقات الهواتف الذكية لتشخيص أمراض النبات</h3><p>تمكّن المزارع من تصوير الورقة المصابة ليقوم التطبيق بتشخيص المرض ووصف العلاج بدقة.</p></div>
     <div class="card"><h3><span class="ic">🚜</span>الجرارات ذاتية القيادة</h3><p>تعمل عبر نظام تحديد الموقع الجغرافي (GPS) لحراثة الأراضي وزراعة البذور دون تدخل بشري مباشر لتقليل نسبة الخطأ.</p></div>
@@ -180,7 +269,7 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 
 <!-- 4: Student 3 -->
 <section class="slide s3">
-  <div class="head"><div><h2>هاني عاطف</h2><div class="axis">الاقتصاد والمال والوظائف</div></div></div>
+  <div class="head"><div><span class="av">ه</span><h2>هاني عاطف</h2><div class="axis">الاقتصاد والمال والوظائف</div></div></div>
   <div class="body">
     <div class="card"><h3><span class="ic">💰</span>التحليل المالي</h3><p>يتطلب التحول إلى الزراعة الذكية استثمارات أولية مرتفعة لشراء أجهزة الاستشعار والطائرات المسيرة، مما يمثل عبئاً على صغار المزارعين. ومع ذلك، يظهر العائد الاستثماري بوضوح على المدى المتوسط.</p></div>
     <div class="card stat"><b>25–35%</b><div class="sw"><p>انخفاض في تكاليف الأسمدة والمياه حسب الدراسات.</p><div class="meter"><i style="--w:10%;margin-inline-start:25%"></i></div></div></div>
@@ -191,7 +280,7 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 
 <!-- 5: Student 4 -->
 <section class="slide s4">
-  <div class="head"><div><h2>محمود عماد</h2><div class="axis">التحيز، الخصوصية، والتشريعات</div></div></div>
+  <div class="head"><div><span class="av">م</span><h2>محمود عماد</h2><div class="axis">التحيز، الخصوصية، والتشريعات</div></div></div>
   <div class="body three">
     <div class="card"><h3><span class="ic">🔒</span>خصوصية البيانات الزراعية</h3><p>يؤدي جمع بيانات دقيقة عن نوعية التربة وحجم المحاصيل والملكية الزراعية عبر التطبيقات إلى مخاطر تتعلق بخصوصية المزارعين وأمن البيانات، وإمكانية استغلالها تجارياً دون إذنهم.</p></div>
     <div class="card"><h3><span class="ic">🧭</span>التحيز الخوارزمي</h3><p>بعض نماذج الذكاء الاصطناعي تُبرمج بناءً على بيانات بيئية لدول أوروبية أو متقدمة، مما يجعلها غير دقيقة تماماً عند تطبيقها في بيئة زراعية عربية أو صحراوية.</p></div>
@@ -201,7 +290,7 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
 
 <!-- 6: Conclusion -->
 <section class="slide s5">
-  <div class="head"><div><h2>الاستنتاج والتوصيات</h2><div class="axis">الفريق بالكامل</div></div></div>
+  <div class="head"><div><span class="av">★</span><h2>الاستنتاج والتوصيات</h2><div class="axis">الفريق بالكامل</div></div></div>
   <div class="body">
     <div class="card wide"><h3><span class="ic">🌾</span>الاستنتاج</h3><p>أثبت البحث أن الذكاء الاصطناعي ليس مجرد رفاهية تقنية، بل هو أداة رئيسية لتعظيم الإنتاج الزراعي في ظل ندرة الموارد المائية والتغير المناخي.</p></div>
     <div class="card wide"><h3><span class="ic">✅</span>التوصيات</h3>
@@ -215,9 +304,10 @@ button:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
   <div class="dots" id="dots"></div>
   <div class="credit" dir="ltr">Designed &amp; developed by <strong>Mustafa Muhammad Abdul Jalil</strong></div>
   <div class="nav">
-    <button id="next" aria-label="التالي">›</button><span id="count"></span><button id="prev" aria-label="السابق">‹</button>
+    <div class="pair"><button id="prev" class="txt" dir="ltr">Back →</button><button id="next" class="txt" dir="ltr">← Next</button></div>
+    <span id="count"></span>
     <button id="home" class="txt" type="button" onclick="go(0)" dir="ltr">Home</button>
-    <button id="fs" aria-label="ملء الشاشة">⛶</button>
+    <button id="fs" class="txt" dir="ltr">⛶ Fullscreen</button>
   </div>
 </div>
 
@@ -236,13 +326,13 @@ document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go
 document.getElementById('next').onclick=()=>go(i+1);
 document.getElementById('prev').onclick=()=>go(i-1);
 document.getElementById('fs').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
-addEventListener('keydown',e=>{
+addEventListener('keydown',e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName))return;
   if(['ArrowLeft','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}
   if(['ArrowRight','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}
   if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);
 });
 let x0=null;
-addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+addEventListener('touchstart',e=>{x0=e.target.closest('.nosel')?null:e.touches[0].clientX},{passive:true});
 addEventListener('touchend',e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(d<0?i+1:i-1);x0=null});
 go((parseInt(location.hash.slice(1))||1)-1);
 
@@ -260,7 +350,7 @@ function countUp(sl){
 const _go=go;
 go=function(n){
   _go(n);
-  const sl=slides[i],c=getComputedStyle(sl).getPropertyValue('--accent').trim()||'#f0c75e';
+  const sl=slides[i],c=getComputedStyle(sl).getPropertyValue('--accent').trim()||'#fbbf24';
   prog.style.width=((i+1)/slides.length*100)+'%';prog.style.background=c;
   document.querySelectorAll('.dots button.on').forEach(d=>d.style.background=c);
   [...dots.children].forEach(d=>{if(!d.classList.contains('on'))d.style.background=''});
@@ -268,7 +358,7 @@ go=function(n){
   document.querySelectorAll('.has-sel').forEach(x=>x.classList.remove('has-sel'));
   countUp(sl);
 };
-document.querySelectorAll('.card,.source').forEach(c=>c.addEventListener('click',()=>{
+document.querySelectorAll('.card,.source').forEach(c=>c.addEventListener('click',()=>{if(c.classList.contains('nosel'))return;
   const body=c.closest('.body'),on=!c.classList.contains('sel');
   if(body){body.querySelectorAll('.card.sel').forEach(x=>x.classList.remove('sel'));body.classList.toggle('has-sel',on)}
   c.classList.toggle('sel',on);
@@ -283,13 +373,28 @@ go(i);
 document.querySelectorAll('.card').forEach(c=>c.addEventListener('mousemove',e=>{
   const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
 const cv=document.getElementById('pt'),cx=cv.getContext('2d');let pts=[];
-function rs(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;pts=Array.from({length:55},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*2.6+.8,v:Math.random()*.5+.15,c:Math.random()>.5?'240,199,94':'127,209,199'}))}
+function rs(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;pts=Array.from({length:55},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*2.6+.8,v:Math.random()*.5+.15,c:Math.random()>.5?'251,191,36':'34,211,238'}))}
 addEventListener('resize',rs);rs();
 (function tick(){
   if(i===0){cx.clearRect(0,0,cv.width,cv.height);
     pts.forEach(p=>{p.y-=p.v;p.x+=Math.sin(p.y/40)*.3;if(p.y<-5){p.y=cv.height+5;p.x=Math.random()*cv.width}
       cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle='rgba('+p.c+',.55)';cx.fill()})}
   requestAnimationFrame(tick)})();
+
+// ---- Motion v3 + Python Lab ----
+const fl=document.getElementById('fl');
+['🌱','🍃','💧','🌾','☀️','🌿'].forEach((e,k)=>{for(let j=0;j<3;j++){const sp=document.createElement('span');sp.textContent=e;
+  sp.style.cssText='left:'+(Math.random()*96)+'%;font-size:'+(18+Math.random()*30)+'px;animation-duration:'+(16+Math.random()*20)+'s;animation-delay:-'+(Math.random()*30)+'s';fl.appendChild(sp)}});
+const orb=document.getElementById('orb');
+addEventListener('mousemove',e=>{orb.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)'});
+document.querySelectorAll('.card:not(.nosel)').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.setProperty('--rx',(-y*7)+'deg');c.style.setProperty('--ry',(x*7)+'deg')});
+  c.addEventListener('mouseleave',()=>{c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')})});
+function burst(){const em=['🌾','✨','🌱','💧','🍃'];for(let k=0;k<28;k++){const b=document.createElement('span');b.className='burst';b.textContent=em[k%5];
+  b.style.left=(10+Math.random()*80)+'%';b.style.setProperty('--x',(Math.random()*240-120)+'px');b.style.animationDelay=(Math.random()*.5)+'s';
+  document.body.appendChild(b);setTimeout(()=>b.remove(),3200)}}
+const _g2=go;go=function(n){_g2(n);if(i===slides.length-1)burst()};
 </script>
 </body>
 </html>
